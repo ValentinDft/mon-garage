@@ -1,59 +1,38 @@
-# MonGarage
+# 🔧 MonGarage
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.7.
+> 🚧 **Projet en cours de développement** — la V1 n'est pas encore disponible, les fonctionnalités décrites ci-dessous sont en cours de construction.
 
-## Development server
+MonGarage est une application web de suivi automobile : un tracker **gratuit** pour gérer son garage, suivre la consommation de carburant, les dépenses et l'entretien de ses véhicules.
 
-To start a local development server, run:
+La plupart des applications du genre sont payantes ou fortement limitées dans leur version gratuite. MonGarage propose une alternative web complète et sans frais.
 
-```bash
-ng serve
-```
+## Fonctionnalités
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Garage** — plusieurs véhicules, avec leur fiche : marque, modèle, immatriculation, date et prix d'achat, kilométrage
+- **Carburant** — saisie des pleins et calcul automatique de la consommation en L/100 km, avec distinction entre plein complet et plein partiel
+- **Dépenses** — dépenses ponctuelles par catégorie et dépenses mensuelles récurrentes (assurance, crédit, parking) saisies une seule fois, puis cumulées automatiquement
+- **Entretien** — carnet des interventions passées : vidange, contrôle technique, pneus, freins, courroie...
+- **Rappels** — échéances à venir en kilométrage ou en date, avec une section « À surveiller » sur le tableau de bord. Le contrôle technique est suivi automatiquement.
 
-## Code scaffolding
+## Sur mobile
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+L'application est pensée **mobile first** : la saisie se fait le plus souvent depuis le téléphone, à la pompe ou au comptoir du garage.
 
-```bash
-ng generate component component-name
-```
+C'est une **PWA** : pas d'App Store, elle s'installe directement depuis le navigateur via « Ajouter à l'écran d'accueil », s'ouvre en plein écran et reste consultable hors ligne.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## À venir
 
-```bash
-ng generate --help
-```
+Une page **Statistiques** dédiée : évolution du kilométrage, coût au kilomètre, répartition des dépenses par catégorie et comparaison entre les véhicules du garage.
 
-## Building
+## Développement
 
-To build the project run:
+Le projet est construit avec Angular et Supabase.
 
 ```bash
-ng build
+npm install     # installer les dépendances
+npm start       # lancer l'app sur http://localhost:4200
+npm test        # lancer les tests
+npm run build   # build de production
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Les conventions de code et le détail de l'architecture sont décrits dans [CLAUDE.md](.claude/CLAUDE.md).
