@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+// Styles globaux de MonGarage.
+
+// Ce fichier ne contient que le document : reset et typographie. Tout le reste
+// vit dans les styles de composants, qui consomment le thème via
+// `@use 'theme' as *;` (résolu par `stylePreprocessorOptions.includePaths`).
+
+// Ici les chemins sont relatifs : ce fichier est à la racine de `src/`, hors
+// du dossier `styles/` déclaré en load path.
+
+// Les polices (Bebas Neue, Inter) sont chargées depuis index.html — Angular
+// inline leur feuille de style au build.
+
+@use './styles/reset';
+@use './styles/typography';

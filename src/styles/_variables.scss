@@ -1,0 +1,169 @@
+// Tokens de design MonGarage.
+
+// Source de vérité : page Notion « 🎨 Design & tokens ».
+// Circuit de mise à jour : maquette Claude Design → page Notion → ce fichier.
+// Aucune couleur, taille ou rayon ne doit être écrit en dur dans un composant.
+
+// Direction visuelle : garage vintage / Americana — plaque émaillée vieillie,
+// enseigne de station-service d'époque. Chaleureux, mais des chiffres qui
+// restent parfaitement lisibles.
+
+// ---------------------------------------------------------------------------
+// Surfaces — ivoire émaillé
+// ---------------------------------------------------------------------------
+
+$color-bg: #f4e9d8; // Fond global
+$color-bg-card: #efe1c9; // Fond des cards
+$color-bg-hover: #e8d8b8; // État hover
+$color-bg-active: #ddcba0; // État actif, fond des jauges
+
+// ---------------------------------------------------------------------------
+// Couleurs de marque
+// ---------------------------------------------------------------------------
+
+$color-primary: #2b3d2f; // Vert atelier — navbar, boutons principaux
+$color-accent: #c1502e; // Rouille — surfaces, liserés, alertes, focus
+$color-chrome: #8a8d91; // Chrome / acier — bordures des cards
+
+// Le rouille de marque ne tient que 3,93:1 sur l'ivoire : assez pour une
+// surface ou un anneau de focus (seuil 3:1), pas pour du texte (seuil 4,5:1).
+// D'où cette variante assombrie, réservée au rouille *écrit*.
+$color-accent-text: #b1492a; // 4,54:1 — liens, texte en rouille
+
+// ---------------------------------------------------------------------------
+// Texte
+// ---------------------------------------------------------------------------
+
+$color-text-primary: #2a2420; // Titres, texte principal
+$color-text-secondary: #5c5246; // Texte secondaire
+$color-text-muted: #6d6456; // Labels, métadonnées — assombri, cf. note AA
+$color-text-on-primary: #f4e9d8; // Texte posé sur le vert atelier
+
+// ---------------------------------------------------------------------------
+// Bordures
+// ---------------------------------------------------------------------------
+
+$color-border: rgb(138 141 145 / 20%); // Hairlines, séparateurs de lignes
+$color-border-strong: #8a8d91; // Bordures de cards, badges
+
+// ---------------------------------------------------------------------------
+// Statuts (rappels d'entretien)
+// ---------------------------------------------------------------------------
+
+$color-status-ok: #4f6f45; // `ok` — 4,74:1
+$color-status-soon: #b1492a; // `due_soon` — assombri, cf. note AA
+$color-status-overdue: #8c2f20; // `overdue` — 6,88:1
+
+// Écart assumé avec la page Notion, à y backporter.
+// Les statuts servent de couleur de *texte* dans les badges (10px) et les
+// labels (12px), donc soumis au seuil AA de 4,5:1. Deux valeurs de la page
+// ne le tenaient pas sur l'ivoire, elles sont assombries à teinte constante :
+//   $color-text-muted   #8a7f6e (3,28:1 / 3,05:1 sur card) → #6d6456 (4,85 / 4,51)
+//   $color-status-soon  #c1502e (3,93:1)                   → #b1492a (4,54)
+
+// ---------------------------------------------------------------------------
+// Focus — hors page Notion, ajouté pour tenir WCAG 2.4.11
+// ---------------------------------------------------------------------------
+
+// Rouille sur fond ivoire : ratio 3.9:1, au-dessus du minimum de 3:1 exigé
+// pour un indicateur non textuel. Sur le vert atelier le même rouille ne
+// passe pas (2.5:1), d'où l'anneau ivoire pour les surfaces sombres.
+
+$color-focus: #c1502e;
+$color-focus-on-dark: #f4e9d8;
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
+
+// ---------------------------------------------------------------------------
+// Typographie
+// ---------------------------------------------------------------------------
+
+$font-display: 'Bebas Neue', 'Oswald', sans-serif;
+$font-sans: 'Inter', system-ui, sans-serif;
+
+// Tailles — nommées par rôle, comme dans la page Notion.
+$font-size-badge: 0.625rem; // 10px — badges, pills
+$font-size-meta: 0.6875rem; // 11px — métadonnées
+$font-size-label: 0.75rem; // 12px — labels
+$font-size-body: 0.8125rem; // 13px — corps de texte
+$font-size-card-title: 0.875rem; // 14px — titres de cards
+$font-size-figure: 1.0625rem; // 17px — chiffres clés
+$font-size-figure-lg: 1.125rem; // 18px — chiffres clés mis en avant
+$font-size-title: 1.375rem; // 22px — titres de page (police condensée)
+$font-size-display: 1.75rem; // 28px — logo (police condensée)
+
+// Graisses.
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+
+// Interlignes.
+$line-height-tight: 1.1; // Titres en police condensée
+$line-height-base: 1.45; // Corps de texte
+
+// Le letter-spacing large est ce qui donne le rendu « enseigne d'époque ».
+$letter-spacing-display: 0.08em; // Logo, grands titres
+$letter-spacing-title: 0.04em; // Titres de page, badges
+
+// ---------------------------------------------------------------------------
+// Formes
+// ---------------------------------------------------------------------------
+
+$radius-card: 10px; // Cards, items de liste
+$radius-app: 14px; // Conteneur principal
+$radius-badge: 12px; // Badges, pills
+$radius-input: 8px; // Champs, boutons
+$border-width: 1px; // Bordures chrome
+$accent-bar-width: 4px; // Barre d'accent des cards véhicule
+$gauge-height: 6px; // Jauges de consommation
+$tap-target-min: 44px; // Zone de tap minimale sur mobile
+$navbar-accent-height: 3px; // Liseré rouille sous la navbar
+
+// ---------------------------------------------------------------------------
+// Espacements — hors page Notion, échelle de 4px
+// ---------------------------------------------------------------------------
+
+$space-xxs: 0.25rem; // 4px
+$space-xs: 0.5rem; // 8px
+$space-sm: 0.75rem; // 12px
+$space-md: 1rem; // 16px
+$space-lg: 1.5rem; // 24px
+$space-xl: 2rem; // 32px
+
+$content-max-width: 1280px; // Largeur utile du conteneur principal
+
+// ---------------------------------------------------------------------------
+// Opacités des motifs récurrents
+// ---------------------------------------------------------------------------
+
+// Les badges et alertes se construisent par variation d'alpha d'une seule
+// couleur de statut — voir les mixins `badge` et `alert`.
+
+$badge-bg-alpha: 0.12;
+$badge-border-alpha: 0.25;
+$alert-bg-alpha: 0.09;
+$alert-border-alpha: 0.3;
+
+// ---------------------------------------------------------------------------
+// Élévation et profondeur — hors page Notion
+// ---------------------------------------------------------------------------
+
+$shadow-card: 0 1px 2px rgb(42 36 32 / 6%);
+$shadow-raised: 0 2px 8px rgb(42 36 32 / 12%);
+$shadow-sheet: 0 -4px 24px rgb(42 36 32 / 18%);
+$color-overlay: rgb(42 36 32 / 45%); // Voile derrière les bottom sheets
+
+// Empilement.
+$z-sticky: 10; // En-têtes collants
+$z-nav: 100; // Navbar, bottom nav
+$z-overlay: 200; // Voile
+$z-sheet: 210; // Bottom sheet, modale
+
+// ---------------------------------------------------------------------------
+// Transitions
+// ---------------------------------------------------------------------------
+
+$duration-fast: 120ms;
+$duration-base: 200ms;
+$duration-sheet: 280ms;
+$easing-standard: cubic-bezier(0.2, 0, 0.2, 1);

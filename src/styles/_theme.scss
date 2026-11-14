@@ -1,0 +1,10 @@
+// Point d'entrée unique du thème pour les styles de composants.
+
+// `src/styles` est déclaré en `includePaths` dans angular.json, donc depuis
+// n'importe quel composant :
+//   @use 'theme' as *;
+//   .vehicle-card { @include card; padding: $space-md; }
+
+@forward 'variables';
+@forward 'breakpoints';
+@forward 'mixins';

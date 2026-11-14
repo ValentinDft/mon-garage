@@ -1,0 +1,149 @@
+// Motifs récurrents de MonGarage.
+
+// Chaque mixin correspond à un motif décrit dans la page Notion
+// « 🎨 Design & tokens » → section « Motifs récurrents ». Les composants
+// composent ces mixins plutôt que de redéclarer bordures et opacités.
+
+// Les mixins qui prennent une couleur attendent une **couleur Sass**
+// (`$color-status-ok`, `$color-accent`…), pas une custom property : les
+// variations d'alpha sont calculées à la compilation.
+
+@use 'sass:color';
+@use 'variables' as *;
+
+// ---------------------------------------------------------------------------
+// Accessibilité
+// ---------------------------------------------------------------------------
+
+/// Anneau de focus visible. `$on-dark` pour les surfaces en vert atelier,
+/// où le rouille ne tient pas le ratio de 3:1.
+@mixin focus-ring($on-dark: false) {
+  $ring-color: $color-focus;
+
+  @if $on-dark {
+    $ring-color: $color-focus-on-dark;
+  }
+
+  outline: $focus-ring-width solid $ring-color;
+  outline-offset: $focus-ring-offset;
+}
+
+/// Zone de tap d'au moins 44px, exigée sur tous les contrôles mobiles.
+@mixin tap-target {
+  min-block-size: $tap-target-min;
+  min-inline-size: $tap-target-min;
+}
+
+/// Masque visuellement sans retirer du flux d'accessibilité.
+@mixin visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+// ---------------------------------------------------------------------------
+// Typographie
+// ---------------------------------------------------------------------------
+
+/// Titre en police condensée — le rendu « enseigne d'époque ».
+@mixin display-title($size: $font-size-title, $spacing: $letter-spacing-title) {
+  font-family: $font-display;
+  font-size: $size;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+  letter-spacing: $spacing;
+}
+
+/// Chiffres clés (km, conso, coût) : chasse fixe pour que les colonnes de
+/// nombres restent alignées d'une ligne à l'autre.
+@mixin numeric($size: $font-size-figure) {
+  font-size: $size;
+  font-weight: $font-weight-semibold;
+  font-variant-numeric: tabular-nums;
+}
+
+/// Label ou métadonnée : petit, discret, jamais en gras.
+@mixin label {
+  color: $color-text-muted;
+  font-size: $font-size-label;
+  font-weight: $font-weight-regular;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// ---------------------------------------------------------------------------
+// Surfaces
+// ---------------------------------------------------------------------------
+
+/// Card : fond crème, bordure chrome 1px, coins arrondis.
+@mixin card {
+  border: $border-width solid $color-border-strong;
+  border-radius: $radius-card;
+  background-color: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+/// Barre d'accent verticale à gauche d'une card véhicule. La couleur vient
+/// de `getVehicleColor()` côté TS, donc passée en custom property.
+@mixin accent-bar($property: --vehicle-accent) {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: $accent-bar-width;
+    background-color: var($property, $color-primary);
+    content: '';
+  }
+}
+
+/// Badge de statut : pill avec fond à 12%, bordure à 25%, texte à 100%.
+@mixin badge($color: $color-primary) {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xxs;
+  border: $border-width solid color.change($color, $alpha: $badge-border-alpha);
+  border-radius: $radius-badge;
+  padding: 2px $space-xs;
+  background-color: color.change($color, $alpha: $badge-bg-alpha);
+  color: $color;
+  font-size: $font-size-badge;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-title;
+  text-transform: uppercase;
+}
+
+/// Alerte : fond à 9%, bordure à 30%, bordure gauche pleine de 4px et coins
+/// non arrondis sur ce côté.
+@mixin alert($color: $color-accent) {
+  border: $border-width solid color.change($color, $alpha: $alert-border-alpha);
+  border-inline-start: $accent-bar-width solid $color;
+  border-radius: 0 $radius-card $radius-card 0;
+  padding: $space-sm;
+  background-color: color.change($color, $alpha: $alert-bg-alpha);
+}
+
+// ---------------------------------------------------------------------------
+// Mobile
+// ---------------------------------------------------------------------------
+
+/// Réserve la hauteur de l'encoche iPhone sous une barre fixée en bas.
+@mixin safe-area-bottom($extra: 0px) {
+  padding-block-end: calc(#{$extra} + env(safe-area-inset-bottom, 0px));
+}
+
+/// Bottom sheet : monte depuis le bas, coins arrondis en haut uniquement.
+@mixin bottom-sheet {
+  border-radius: $radius-app $radius-app 0 0;
+  background-color: $color-bg;
+  box-shadow: $shadow-sheet;
+}

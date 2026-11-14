@@ -1,0 +1,10 @@
+@use 'theme' as *;
+
+// Coquille de l'app : la navbar / barre d'onglets et le conteneur de contenu
+// viendront s'empiler ici.
+:host {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  background-color: $color-bg;
+}

@@ -77,6 +77,29 @@ src/app/
 
 Les routes de features sont **lazy loaded**. `auth.guard.ts` redirige vers `/login` en l'absence de session Supabase.
 
+## Thème
+
+Direction visuelle : **garage vintage / Americana** — plaque émaillée vieillie, enseigne de station-service d'époque, chaleureux, avec des chiffres qui restent lisibles.
+
+Tout style de composant commence par `@use 'theme' as *;` — `src/styles` est en `includePaths`, le barrel `_theme.scss` réexporte variables + breakpoints + mixins. **Aucune couleur, taille, rayon ni breakpoint en dur dans un composant.**
+
+| Fichier                        | Contenu                                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------- |
+| `src/styles/_variables.scss`   | tokens : couleurs, typo, formes, espacements, ombres, z-index, durées                       |
+| `src/styles/_breakpoints.scss` | `$bp-tablet`/`$bp-desktop` + mixins `tablet`, `desktop`, `from($w)`                         |
+| `src/styles/_mixins.scss`      | motifs : `card`, `badge`, `alert`, `accent-bar`, `focus-ring`, `tap-target`, `bottom-sheet` |
+| `src/styles/_reset.scss`       | reset, base document, focus visible, `prefers-reduced-motion`                               |
+| `src/styles/_typography.scss`  | titres, chiffres en `tabular-nums`, utilitaires `u-*`                                       |
+
+- Palette : fond ivoire `$color-bg` `#f4e9d8`, cards `$color-bg-card` `#efe1c9`, vert atelier `$color-primary` `#2b3d2f`, rouille `$color-accent` `#c1502e`, chrome `$color-chrome` `#8a8d91`. Texte `#2a2420` / `#5c5246` / `#6d6456`. Statuts : `$color-status-ok` `#4f6f45`, `-soon` `#b1492a`, `-overdue` `#8c2f20`.
+- **Rouille : deux tokens.** `$color-accent` `#c1502e` pour les surfaces, liserés et l'anneau de focus (3,93:1, au-dessus du seuil de 3:1) ; `$color-accent-text` `#b1492a` dès que le rouille est **écrit** (4,54:1, seuil AA de 4,5:1). `$color-text-muted` et `$color-status-soon` sont assombris par rapport à la page Notion pour la même raison — écart documenté dans `_variables.scss`, à backporter.
+- Typo : `$font-display` (Bebas Neue) pour le logo et les titres de page, avec `letter-spacing` large — c'est ce qui donne le rendu enseigne. `$font-sans` (Inter) partout ailleurs, corps à 13px. Les chiffres clés passent par le mixin `numeric` (`tabular-nums`).
+- Badges et alertes se construisent par **variation d'alpha** d'une seule couleur de statut (12 % / 25 % pour un badge, 9 % / 30 % pour une alerte) — via les mixins, jamais à la main.
+- Les couleurs d'accent de véhicule viennent de `core/utils/vehicle-colors.ts` (`getVehicleColor(index)`) et se posent en custom property `--vehicle-accent`, consommée par le mixin `accent-bar`.
+- Focus : `focus-ring` est appliqué globalement sur `:focus-visible` ; sur fond vert atelier, utiliser `focus-ring($on-dark: true)` (le rouille n'y tient pas le ratio de 3:1).
+- Les polices sont chargées depuis `index.html`. Le `viewport-fit=cover` y est indispensable pour que `env(safe-area-inset-bottom)` remonte sous la barre d'onglets.
+- **Source de vérité** : page Notion « 🎨 Design & tokens » du projet MonGarage. Circuit : maquette Claude Design → page Notion → `_variables.scss`. Jamais l'inverse.
+
 ## Responsive
 
 ```scss
@@ -84,6 +107,8 @@ Les routes de features sont **lazy loaded**. `auth.guard.ts` redirige vers `/log
 $bp-tablet: 768px; // navbar horizontale, grille 2 colonnes
 $bp-desktop: 1200px; // grille 3 colonnes, graphiques détaillés
 ```
+
+Mobile first : on ne monte qu'en `min-width`, via les mixins `@include tablet { … }` / `@include desktop { … }`. Jamais de `max-width`.
 
 - Sous 768px : `BottomNavComponent` (barre d'onglets fixe en bas : Tableau de bord / Garage / Stats), formulaires en **bottom sheet** (jamais en modal centrée), cards véhicule en une colonne, FAB « Ajouter un plein ».
 - Au-dessus : `NavBarComponent` horizontale, grille 2-3 colonnes, formulaires en modal centrée.

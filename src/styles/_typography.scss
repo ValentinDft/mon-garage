@@ -1,0 +1,55 @@
+// Typographie globale.
+
+// Deux familles seulement : Bebas Neue (condensée) pour le logo et les titres
+// de page, Inter pour tout le reste. Les tailles sont volontairement petites —
+// l'app affiche beaucoup de chiffres sur un écran de téléphone.
+
+@use 'theme' as *;
+
+h1,
+h2 {
+  @include display-title;
+}
+
+h1 {
+  font-size: $font-size-title;
+}
+
+h2 {
+  font-size: $font-size-card-title;
+  letter-spacing: $letter-spacing-title;
+}
+
+// Titres de cards et de sections : Inter, pas la police condensée.
+h3,
+h4 {
+  font-size: $font-size-card-title;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-base;
+}
+
+small {
+  font-size: $font-size-meta;
+}
+
+// Les chiffres d'un tableau ou d'une liste doivent s'aligner verticalement,
+// d'où la chasse fixe appliquée dès qu'un élément porte des données.
+th,
+td,
+time,
+output {
+  font-variant-numeric: tabular-nums;
+}
+
+// Utilitaires globaux — le reste de la typographie se fait dans les composants.
+.u-visually-hidden {
+  @include visually-hidden;
+}
+
+.u-numeric {
+  @include numeric;
+}
+
+.u-truncate {
+  @include truncate;
+}
