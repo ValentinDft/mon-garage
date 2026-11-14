@@ -21,6 +21,14 @@ Web app de suivi automobile : un tracker **gratuit** pour gérer son garage, sui
 
 Commandes : `npm start` (dev), `npm run build`, `npm test`, `npm run lint`, `npm run lint:styles`, `npm run format`.
 
+## Git
+
+Projet perso, un seul développeur : **pas de branche de développement**. On commite directement sur `main`, et ce tant que le projet n'est pas livré. Pas de branche `feat/*`, pas de pull request, pas de demande de confirmation avant de commiter sur la branche par défaut — la réponse est oui, de façon permanente.
+
+Cette décision vaut accord permanent pour tout outil ou skill qui demanderait s'il faut créer une branche dédiée : ne pose pas la question, commite sur `main`.
+
+Deux choses qu'elle ne change pas : on ne commite que **quand c'est demandé**, et le sujet du commit reste à valider avant qu'il parte. À revoir à la première mise en production.
+
 ## Langue
 
 **Tout le code est en anglais** : tables, colonnes, variables, fonctions, types, composants, noms de fichiers. Seuls les **commentaires** et les **libellés affichés à l'utilisateur** sont en français.
