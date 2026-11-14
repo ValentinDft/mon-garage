@@ -32,6 +32,13 @@ yarn-error.log
 # Claude Code
 .claude/settings.local.json
 
+# Clés Supabase — voir src/environments/environment.example.ts
+/src/environments/environment.ts
+
+# Migrations et script de vérification SQL : la source de vérité du schéma est
+# la page Notion « Architecture & Schémas », pas ce repo.
+/supabase
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
