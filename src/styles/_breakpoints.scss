@@ -1,0 +1,29 @@
+// Breakpoints MonGarage.
+
+// Mobile first : les styles de base sont ceux du téléphone, les media queries
+// montent vers le desktop. On n'écrit jamais de `max-width`.
+
+$bp-tablet: 768px; // Navbar horizontale, grille 2 colonnes
+$bp-desktop: 1200px; // Grille 3 colonnes, graphiques détaillés
+
+/// À partir de la tablette : navbar horizontale, formulaires en modale
+/// centrée plutôt qu'en bottom sheet.
+@mixin tablet {
+  @media (width >= #{$bp-tablet}) {
+    @content;
+  }
+}
+
+/// À partir du desktop : grille 3 colonnes, graphiques détaillés.
+@mixin desktop {
+  @media (width >= #{$bp-desktop}) {
+    @content;
+  }
+}
+
+/// Palier sur mesure, pour les cas que les deux breakpoints ne couvrent pas.
+@mixin from($width) {
+  @media (width >= #{$width}) {
+    @content;
+  }
+}

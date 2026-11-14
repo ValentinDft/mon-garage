@@ -1,0 +1,97 @@
+// Reset et styles de base du document.
+
+@use 'theme' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: light;
+
+  // Hauteur de référence pour le `min-block-size: 100%` du body.
+  block-size: 100%;
+
+  // Empêche iOS Safari de grossir le texte en paysage. Safari ne connaît que
+  // la version préfixée, d'où l'exception au linter.
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-block-size: 100%;
+  background-color: $color-bg;
+  color: $color-text-primary;
+  font-family: $font-sans;
+  font-size: $font-size-body;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-inline-size: 100%;
+}
+
+// Les contrôles de formulaire n'héritent pas de la police par défaut.
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+// Rouille assombri : le rouille de marque ne tient pas 4,5:1 en texte.
+// Le soulignement est conservé pour ne pas porter l'information par la
+// seule couleur.
+a {
+  color: $color-accent-text;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+// Safari retire le rôle `list` dès qu'on enlève les puces, donc VoiceOver
+// n'annonce plus « liste de 4 éléments ». Toute liste sémantique doit porter
+// `role="list"` dans son template — c'est le navigateur cible de la PWA.
+ul,
+ol {
+  list-style: none;
+}
+
+// Focus visible partout, au clavier comme au lecteur d'écran. Les composants
+// posés sur fond vert atelier surchargent avec `focus-ring($on-dark: true)`.
+:focus-visible {
+  @include focus-ring;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
